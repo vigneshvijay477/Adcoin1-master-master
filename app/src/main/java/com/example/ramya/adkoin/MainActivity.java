@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.Signature;
+import android.os.Handler;
 import android.os.Message;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -15,6 +16,7 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.facebook.accountkit.AccountKitLoginResult;
@@ -32,6 +34,17 @@ public class MainActivity extends AppCompatActivity {
     Button mobile;
 
     SharedPreferences sp;
+    RelativeLayout rellay1,rellay2;
+
+    Handler handler = new Handler();
+    Runnable runnable = new Runnable() {
+        @Override
+        public void run() {
+            rellay1.setVisibility(View.VISIBLE);
+            rellay2.setVisibility(View.VISIBLE);
+        }
+    };
+
 
 
     @Override
@@ -77,6 +90,10 @@ public class MainActivity extends AppCompatActivity {
             goTosuccess();
         }
 
+
+        rellay1 = (RelativeLayout) findViewById(R.id.rellay1);
+        rellay2 = (RelativeLayout) findViewById(R.id.rellay2);
+        handler.postDelayed(runnable, 2000); //2000 is the timeout for the splash
 
     }
 
